@@ -4,11 +4,14 @@ const bodyParser = require('body-parser')
 
 const bcrypt= require('bcrypt-nodejs')
 
+const cors=require('cors')
+
 
 
 
 const app=express();
 app.use(bodyParser.json())
+app.use(cors())
 
 const database={
     users:[
@@ -116,11 +119,12 @@ app.post('/register',(req,res)=>{
 
 app.post('/sign',(req,res)=>{
     if (req.body.email===database.users[0].email && req.body.password===database.users[0].password){
-        res.json('success');
+        res.json('success');   
     }
     else{
         res.status(400).json('error logging in');
     }
+    
    
 })
 

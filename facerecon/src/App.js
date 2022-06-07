@@ -25,6 +25,11 @@ class App extends Component {
       }
     }
 
+
+   
+
+
+
     calculateFaceLocation=(response)=>{
       
       const clarifaiFace = response.outputs[0].data.regions[0].region_info.bounding_box;
@@ -63,11 +68,12 @@ class App extends Component {
     }
 
     onRouteChange=(route)=>{
-      if(route==='signout'){
-        this.setState({isSignedIn:false})
-      } else if(route==='home'){
+      
+      if(route ==='home'){
         this.setState({isSignedIn:true})
-      }
+      }  else if(route ==='signout'){
+        this.setState({isSignedIn:false})
+      } 
       this.setState({route: route})
     }
 
