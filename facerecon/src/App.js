@@ -22,6 +22,13 @@ class App extends Component {
         box:{},
         route:'signIn',
         isSignedIn: false,
+        user:{
+          id:'',
+          name:'',
+          email:'',
+          entries:0,
+          joined:''
+        }
       }
     }
 
@@ -29,7 +36,19 @@ class App extends Component {
    
 
 
+    loadUser = (data)=>{
 
+      this.setState({user:{
+        id:data.id,
+        name:data.name,
+        email:data.email,
+        entries: data.entries,
+        joined:data.joined
+
+      }})
+
+
+    }
     calculateFaceLocation=(response)=>{
       
       const clarifaiFace = response.outputs[0].data.regions[0].region_info.bounding_box;
@@ -96,7 +115,7 @@ class App extends Component {
               : (
                 this.state.route==='signIn'
                 ? <SignIn onRouteChange={this.onRouteChange}/>
-                : <Register onRouteChange={this.onRouteChange} />
+                : <Register loadUser={this.loadUser} onRouteChange={this.onRouteChange} />
                 )
             } 
             
