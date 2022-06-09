@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
+import {useNavigate} from 'react-router-dom';
 
 
 const SignIn = ({onRouteChange})=>{
+
+    const navigate = useNavigate();
 
     const[email,setEmail]=useState('')
     const[password,setPassword]=useState('')
@@ -25,7 +28,7 @@ const SignIn = ({onRouteChange})=>{
         .then(data => {
             
             if (data === "success"){
-                onRouteChange('home');
+                navigate("/home");
                 console.log(data);
                
             }

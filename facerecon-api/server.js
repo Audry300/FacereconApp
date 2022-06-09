@@ -4,7 +4,7 @@ const bodyParser = require('body-parser')
 
 const bcrypt= require('bcrypt-nodejs')
 
-const cors=require('cors')
+const cors= require('cors')
 
 
 
@@ -97,7 +97,6 @@ app.post('/register',(req,res)=>{
 
     bcrypt.hash(password,null,null,function(err,hash){
         console.log(hash);
-        console.log("Just bashed the passwrod")
     })
     database.users.push({
         id:'125',
@@ -107,8 +106,9 @@ app.post('/register',(req,res)=>{
         entries:0,
         joined:new Date()
     })
-    console.log(database.users[database.users.length-1]);
     res.json(database.users[database.users.length-1]);
+    console.log(database.users[database.users.length-1]);
+    
     
     
 })
@@ -119,7 +119,7 @@ app.post('/register',(req,res)=>{
 app.post('/sign',(req,res)=>{
     if (req.body.email===database.users[0].email && req.body.password===database.users[0].password){
         res.json('success');
-        console.log('It was a success');   
+        
     }
     else{
         res.status(400).json('error logging in');

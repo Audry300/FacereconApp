@@ -8,6 +8,7 @@ import Logo from './components/logo/Logo.js';
 import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm.js';
 import Rank from './components/Rank/Rank.js';
 import Clarifai from 'clarifai';
+import { BrowserRouter } from 'react-router-dom';
 
 const app = new Clarifai.App({
   apiKey: 'e4d110c01e2849a7a7b7f73b640a80d9'
@@ -98,26 +99,32 @@ class App extends Component {
 
     render(){
       return(
+
+        
        
           <div className="App">
-            <Navigation isSignedIn={this.state.isSignedIn} onRouteChange={this.onRouteChange}/>
-           
-            {this.state.route==='home' 
-            ? <div>
-                  <Logo />
-                  <Rank />
-                  <ImageLinkForm  
-                    onInputChange={this.onInputChange}
-                    onButtonSubmit={this.onButtonSubmit}
-                  />
-                  <FaceRecognition  imageURL={this.state.imageURL} box={this.state.box}/>
-                </div> 
-              : (
-                this.state.route==='signIn'
-                ? <SignIn onRouteChange={this.onRouteChange}/>
-                : <Register loadUser={this.loadUser} onRouteChange={this.onRouteChange} />
-                )
-            } 
+          <BrowserRouter>
+
+          
+              <Navigation isSignedIn={this.state.isSignedIn} onRouteChange={this.onRouteChange}/>
+            
+              {this.state.route==='home' 
+              ? <div>
+                    <Logo />
+                    <Rank />
+                    <ImageLinkForm  
+                      onInputChange={this.onInputChange}
+                      onButtonSubmit={this.onButtonSubmit}
+                    />
+                    <FaceRecognition  imageURL={this.state.imageURL} box={this.state.box}/>
+                  </div> 
+                : (
+                  this.state.route==='signIn'
+                  ? <SignIn onRouteChange={this.onRouteChange}/>
+                  : <Register loadUser={this.loadUser} onRouteChange={this.onRouteChange} />
+                  )
+              } 
+            </BrowserRouter>
             
           </div>
      

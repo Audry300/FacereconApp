@@ -1,8 +1,10 @@
 import {React,useState} from 'react';
+import {useNavigate} from 'react-router-dom';
 
 
 const Register = ({onRouteChange,loadUser})=>{
 
+    const navigate=useNavigate();
     const[email,setEmail]=useState('')
     const[password,setPassword]=useState('')
     const[name,setName]=useState('') 
@@ -10,7 +12,6 @@ const Register = ({onRouteChange,loadUser})=>{
     const onSubmit=()=>{
 
         fetch('http://localhost:3000/register',{
-
             method: 'POST',
             headers:{'Content-Type':'application/json'},
             body: JSON.stringify({
@@ -21,13 +22,14 @@ const Register = ({onRouteChange,loadUser})=>{
         })
         .then(response => {
             response.json()
+            console.log("The response was returned",response)
         })
         .then( user => {
+            console.log("The user was returned and it is this one",user);
             if (user){
                 console.log(user);
                 loadUser(user);
-                onRouteChange('home');
-                
+                navigate("/home");
             }
         })
 
