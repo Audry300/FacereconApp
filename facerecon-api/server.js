@@ -8,7 +8,7 @@ const cors= require('cors')
 
 const knex=require('knex')
 
-const postgres=knex({
+const db=knex({
     client:'pg',
     connection:{
         host:'127.0.0.1',
@@ -18,7 +18,10 @@ const postgres=knex({
     }
 })
 
-console.log(postgres.select('*').from('users'));
+db.select('*').from('users').then(data=>{
+    console.log(data)
+
+});
 
 
 const app=express();
@@ -106,23 +109,18 @@ app.post('/image',(req,res)=>{
 
 app.post('/register',(req,res)=>{
     const{email,password,name}=req.body;
-
-    bcrypt.hash(password,null,null,function(err,hash){
-        console.log(hash);
-    })
-    database.users.push({
-        id:'125',
+    db('users')
+    .returning('*')
+    .insert({
         name:name,
         email:email,
-        password:password,
-        entries:0,
         joined:new Date()
     })
-    res.json(database.users[database.users.length-1]);
-    console.log(database.users[database.users.length-1]);
-    
-    
-    
+    .then(response=>{
+        res.json(response)
+        console.log("Registered the user successfully")
+    })
+    .catch(err=>res.status(400).json("Unable to register"))
 })
 
 // SIGN IN PROCESS    //

@@ -100,8 +100,6 @@ const Register = ({onRouteChange,loadUser})=>{
                     type="submit" 
                     value="Register"/>
                 </div>
-
-                
             </form>
         </main>
         </article>
