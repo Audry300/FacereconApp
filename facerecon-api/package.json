@@ -13,6 +13,8 @@
     "bcrypt-nodejs": "^0.0.3",
     "body-parser": "^1.19.1",
     "express": "^4.17.2",
-    "nodemon": "^2.0.15"
+    "knex": "^2.1.0",
+    "nodemon": "^2.0.15",
+    "pg": "^8.7.3"
   }
 }
